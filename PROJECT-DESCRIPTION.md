@@ -31,6 +31,3 @@ Inlämning sker via Github och Learnpoint. Ladda upp ditt projekt på Github. G�
 **Inloggningsuppgifter:** Skriv ner användarnamn och lösenord för en staff-roll samt en admin-roll.
 
 **Namngivining av projekt:** where-its-at-förnamn-efternamn
-
-**Inlämning senast:** 5/6 23:59
-
