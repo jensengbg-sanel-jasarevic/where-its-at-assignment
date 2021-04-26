@@ -1,3 +1,4 @@
+const port = process.env.PORT || 5000
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -40,6 +41,6 @@ app.use('/api/admin', adminRouter);
 app.use('/api/staff', staffRouter);
 app.use('/api/index', eventsRouter);
 
-app.listen(7000, () => {
+app.listen(port, () => {
     console.log('Server is running');
 })
