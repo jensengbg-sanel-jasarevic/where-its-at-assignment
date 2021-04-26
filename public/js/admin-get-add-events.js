@@ -1,4 +1,3 @@
-const api = window.location.host === 'localhost' ? 'http://localhost/api/admin/adminisloggedin' : 'http://localhost/api/admin/adminisloggedin';
 const adminAddButton = document.querySelector('#admin-add-submit');
 let adminGetEvents = document.querySelector('.admin-getevent');
 
