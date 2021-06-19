@@ -29,16 +29,14 @@ ett biljettnummer. En person som arbetar som personal kan logga in och verifiera
 Inlämning sker via Github och Learnpoint. Ladda upp ditt projekt på Github. Gå sedan in på Learnpoint och under innehåll finns det en inlämningsuppgift där du ska posta din länk till ditt repo.
 
 **Inloggningsuppgifter:** Skriv ner användarnamn och lösenord för en staff-roll samt en admin-roll.<br>
-**admin user:**<br>
 admin-user<br>
-**admin password:**<br>
-admin123
+admin123<br>
 
-**staff user:**<br>
 staff-user<br>
-**staff-password:**<br>
-staff123
+staff123<br>
 
-**Namngivining av projekt:** where-its-at-förnamn-efternamn
+**Namngivining av projekt:** where-its-at-förnamn-efternamn<br>
 
 **Inlämning senast:** 5/6 23:59
+Cloud platform deploy:<br>
+https://where-its-at.herokuapp.com
