@@ -47,7 +47,7 @@ function selectedEvent() {
       events[i].addEventListener('click',  () => {
           let eventID = events[i].id;
           sessionStorage.setItem('event-id', eventID);
-          location.href = cloudURL + '/user-order.html';
+          location.href = cloudURL + '/selected-event.html';
       });
     }
 }

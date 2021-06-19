@@ -54,6 +54,6 @@ async function signedIn() {
     const data = await response.json();
     
     if (data.loginSuccess) {
-        location.href = cloudURL + '/admin-getaddevent.html';
+        location.href = cloudURL + '/loggedin-admin.html';
     } 
 }

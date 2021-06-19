@@ -54,6 +54,6 @@ async function signedIn() {
     const data = await response.json();
     
     if (data.loginSuccess) {
-        location.href = cloudURL + '/staff-verify.html';
+        location.href = cloudURL + '/loggedin-staff.html';
     } 
 }

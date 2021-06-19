@@ -21,7 +21,7 @@ function showEvent(order) {
         }
 
         postTicketOrder(orderObj);
-        location.href = cloudURL + '/user-ticket.html';
+        location.href = cloudURL + '/event-ticket.html';
     });
 
     let orderSectionTag = document.querySelector('.order-ticket');
