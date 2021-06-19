@@ -1,8 +1,8 @@
 const urlLocal = 'http://localhost:7000';
 const urlCloud = 'https://where-its-at.herokuapp.com'    
 
-let addEventBtn = document.querySelector('#add-event-btn');
 let eventList = document.querySelector('.events-list-admin');
+let addEventBtn = document.querySelector('#add-event-btn');
 signedIn();
 
 addEventBtn.addEventListener('click', () => {
