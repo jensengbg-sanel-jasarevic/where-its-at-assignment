@@ -23,6 +23,7 @@ addEventBtn.addEventListener('click', () => {
             ticketsFormInput: parseInt (formTickets.value),
             priceFormInput: parseInt (formPrice.value)
         }
+        eventlist.innerHTML = '';
         addEvent(formObj);
         getEvents();
     });
