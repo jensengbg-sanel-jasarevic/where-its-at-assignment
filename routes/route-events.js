@@ -1,4 +1,4 @@
-const { getEvents, showEvent, addOrder, getTicketFromOrders } = require('../models/database-functions');
+const { getEvents, findEvent, addTicketOrder, findTicketOrder } = require('../models/database-functions');
 const { generateTicketNumber } = require('../models/generate-ticket-number');
 const { Router } = require('express');
 
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const body = req.body;
 
-    let ticket = await showEvent(body);
+    let ticket = await findEvent(body);
 
     let resObj = {
         id: ticket.id,
@@ -32,15 +32,15 @@ router.post('/', async (req, res) => {
 router.post('/ticket', async (req, res) => {
     const body = req.body;
     const ticketNumber = generateTicketNumber();
-    const addTicketOrder = await addOrder(body.order, ticketNumber);
-    res.send(JSON.stringify(addTicketOrder));
+    const postTicketOrder = await addTicketOrder(body.order, ticketNumber);
+    res.send(JSON.stringify(postTicketOrder));
 });
 
 // GET - Retrieve selected ticket order
 router.get('/ticket/:id', async (req, res) => {
     const ticketNumber = req.params.id;    
 
-    let getOrderTicket = await getTicketFromOrders(ticketNumber);
+    let getOrderTicket = await findTicketOrder(ticketNumber);
 
     let resObj = {
         ticket: getOrderTicket

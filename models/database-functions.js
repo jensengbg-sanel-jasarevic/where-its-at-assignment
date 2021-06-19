@@ -10,26 +10,26 @@ async getEvents() {
     return await db.get('events').value();
 },
 
-async addEvents(adminFormInput) {
+async addEvent(adminFormInput) {
     return await db.get('events').push({id: uuid, namn: adminFormInput.nameFormInput, var: adminFormInput.whereFormInput, datum: adminFormInput.dateFormInput, from: adminFormInput.fromFormInput, till: adminFormInput.toFormInput, platser: 0, biljetter: adminFormInput.ticketsFormInput, pris: adminFormInput.priceFormInput}).write();
 },
 
-async getUsername(user) {
+async findUsername(user) {
     return await db.get('users').find({ username: user.username }).value();
 },
 
-async showEvent(event) {
+async findEvent(event) {
     return await db.get('events').find({ id: event.eventID }).value();
 },
 
-async addOrder(order, ticketNumber) {
+async addTicketOrder(order, ticketNumber) {
     let userOrder = order; 
     userOrder.biljettnummer = ticketNumber;
     await db.get('orders').push(userOrder).write();
     return userOrder;
 },
 
-async getTicketFromOrders(ticketNumber) {
+async findTicketOrder(ticketNumber) {
     return await db.get('orders').find({ biljettnummer: ticketNumber }).value();
 },
 

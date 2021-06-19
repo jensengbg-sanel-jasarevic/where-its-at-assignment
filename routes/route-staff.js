@@ -1,4 +1,4 @@
-const { getUsername, getTicketFromOrders, assignVerified } = require('../models/database-functions');
+const { findUsername, findTicketOrder, assignVerified } = require('../models/database-functions');
 const { matchPassword } = require('../models/hash-password');
 const { Router } = require("express");
 const jwt = require('jsonwebtoken');
@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
         success: false
     }
 
-    const user = await getUsername(body);    
+    const user = await findUsername(body);    
     const isAMatch = await matchPassword(body.password, user.password);
     
     if (user && isAMatch) {
@@ -56,7 +56,7 @@ router.post('/verifyticket', async (req, res) => {
         message: 'Non existing ticket number'
     };
 
-    const ticket = await getTicketFromOrders(body.ticketNumber);
+    const ticket = await findTicketOrder(body.ticketNumber);
 
      if (ticket && ticket.verified !== true) {
         assignVerified(body.ticketNumber);

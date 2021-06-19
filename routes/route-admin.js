@@ -1,4 +1,4 @@
-const { getEvents, addEvents, getUsername } = require('../models/database-functions');
+const { getEvents, addEvent, findUsername } = require('../models/database-functions');
 const { matchPassword } = require('../models/hash-password');
 const { Router } = require("express");
 const jwt = require('jsonwebtoken');
@@ -14,17 +14,16 @@ router.get('/events', async (req, res) => {
 // POST - Add event
 router.post('/events', async (req, res) => {
     const body = req.body;    
-    let addEvent = await addEvents(body);
+    let postEvent = await addEvent(body);
 
     let resObj = {
         success: false
     }
-    
-    if (addEvent) {
+
+    if (postEvent) {
         resObj.success = true;
         resObj.message = 'Event added';
     }
-
     res.send(JSON.stringify(resObj));
 });
 
@@ -36,7 +35,7 @@ router.post('/', async (req, res) => {
         success: false,
     }
 
-    const user = await getUsername(body);    
+    const user = await findUsername(body);    
     const isAMatch = await matchPassword(body.password, user.password);
 
     if (user && isAMatch) {

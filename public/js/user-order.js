@@ -1,5 +1,5 @@
-const urlLocal = 'http://localhost:7000';
-const urlCloud = 'https://where-its-at.herokuapp.com'
+const localURL = 'http://localhost:7000';
+const cloudURL = 'https://where-its-at.herokuapp.com'
 
 const submitOrderButton = document.querySelector('#order-submit');
 getSelectedEvent();
@@ -21,7 +21,7 @@ function showEvent(order) {
         }
 
         postTicketOrder(orderObj);
-        location.href = urlCloud + '/user-ticket.html';
+        location.href = cloudURL + '/user-ticket.html';
     });
 
     let orderSectionTag = document.querySelector('.order-ticket');
@@ -49,7 +49,7 @@ function getSessionStorage() {
     }
     
     try {
-        let response = await fetch(urlCloud + '/api', {
+        let response = await fetch(cloudURL + '/api', {
             method: 'POST',
             body: JSON.stringify(event),
             headers : {
@@ -74,7 +74,7 @@ async function postTicketOrder(orderObj) {
     }
 
     try {
-        let response = await fetch(urlCloud + '/api/ticket', {
+        let response = await fetch(cloudURL + '/api/ticket', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

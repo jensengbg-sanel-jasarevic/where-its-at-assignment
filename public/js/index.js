@@ -1,8 +1,9 @@
-const eventsListSectionTag = document.querySelector('.events-list');
-const urlLocal = 'http://localhost:7000';
-const urlCloud = 'https://where-its-at.herokuapp.com'
+const localURL = 'http://localhost:7000';
+const cloudURL = 'https://where-its-at.herokuapp.com'
 
-fetch(urlCloud + '/api', { method: 'GET' })
+const eventsListSectionTag = document.querySelector('.events-list');
+
+fetch(cloudURL + '/api', { method: 'GET' })
   .then(response => response.json())
   .then(data => showEvents(data));
 
@@ -46,7 +47,7 @@ function selectedEvent() {
       events[i].addEventListener('click',  () => {
           let eventID = events[i].id;
           sessionStorage.setItem('event-id', eventID);
-          location.href = urlCloud + '/user-order.html';
+          location.href = cloudURL + '/user-order.html';
       });
     }
 }
