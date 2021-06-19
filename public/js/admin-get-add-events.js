@@ -1,3 +1,6 @@
+const urlLocal = 'http://localhost:7000';
+const urlCloud = 'https://where-its-at.herokuapp.com'    
+
 let addEventBtn = document.querySelector('#add-event-btn');
 let eventList = document.querySelector('.events-list-admin');
 signedIn();
@@ -30,9 +33,8 @@ function getSessionToken() {
 
 async function signedIn() {
     const token = getSessionToken();
-    const url = 'http://localhost:7000/api/admin/login';
 
-    const response = await fetch(url, { 
+    const response = await fetch(urlCloud + '/api/admin/login', { 
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token
@@ -43,13 +45,12 @@ async function signedIn() {
     if (data.loginSuccess) {
         getEvents();
     } else if (!data.loginSuccess) {
-        location.href = 'http://localhost:7000/login-admin.html'
+        location.href = urlCloud + '/login-admin.html'
     } 
 };
 
 async function getEvents() {
-    const url = 'http://localhost:7000/api/admin/events';
-    const response = await fetch(url, {method: 'GET'});
+    const response = await fetch(urlCloud + '/api/admin/events', { method: 'GET' } );
     const data = await response.json();
     showEvents(data);
 };
@@ -98,8 +99,7 @@ async function showEvents(events) {
 
 async function addEvent(event) {
     try {
-        const url = 'http://localhost:7000/api/admin/events';
-        const response = await fetch(url, {
+        const response = await fetch(urlCloud + '/api/admin/events', {
             method: 'POST',
             body: JSON.stringify(event),
             headers: {
