@@ -30,12 +30,12 @@ Inlämning sker via Github och Learnpoint. Ladda upp ditt projekt på Github. G�
 
 **Inloggningsuppgifter:** Skriv ner användarnamn och lösenord för en staff-roll samt en admin-roll.<br>
 **admin user:**<br>
-admin-user
+admin-user<br>
 **admin password:**<br>
 admin123
 
 **staff user:**<br>
-staff-user
+staff-user<br>
 **staff-password:**<br>
 staff123
 
