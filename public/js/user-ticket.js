@@ -22,7 +22,7 @@ getTicket()
 }
 
  async function getTicket() {
-    const url = `http://localhost:7000/api/index//getorderticket/${sessionTicketNumber}`;
+    const url = `http://localhost:7000/api/ticket/${sessionTicketNumber}`;
     const response = await fetch(url, {method: 'GET'});
     const data = await response.json();
     showTicket(data);

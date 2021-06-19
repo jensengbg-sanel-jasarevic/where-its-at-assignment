@@ -19,9 +19,9 @@ app.use(cors());
 app.use(express.static('public'));
 
 // Endpoints
-app.use('/api/admin', adminRouter);
+app.use('/api', eventsRouter);
 app.use('/api/staff', staffRouter);
-app.use('/api/index', eventsRouter);
+app.use('/api/admin', adminRouter);
 
 app.listen(7000, () => {
     console.log('Server running');

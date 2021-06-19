@@ -1,7 +1,7 @@
 const eventsListSectionTag = document.querySelector('.events-list');
-const url = 'http://localhost:7000/api/index';
+const url = 'http://localhost:7000/api';
 
-fetch(url + '/getallevents', { method: 'GET' })
+fetch(url, { method: 'GET' })
   .then(response => response.json())
   .then(data => showEvents(data));
 
@@ -31,14 +31,14 @@ const showEvents = data => {
     eventInfo.append(eventPlace);
     eventInfo.append(eventTimePrice);
 
-    selectedOrder()
+    selectedEvent()
 }};
 
 function sessionStoreID(eventID) {
   return sessionStorage.setItem('event-id', eventID);
 }
 
-function selectedOrder() {
+function selectedEvent() {
   const events = document.querySelectorAll('.event-header');
 
   for (let i = 0; i < events.length; i++) {

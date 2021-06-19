@@ -1,7 +1,7 @@
 const submitOrderButton = document.querySelector('#order-submit');
-postSelectedTicket();
+getSelectedEvent();
 
-function showOrder(order) {
+function showEvent(order) {
     submitOrderButton.addEventListener('click', () => {
 
         let orderObj = {
@@ -17,7 +17,7 @@ function showOrder(order) {
             verified: false
         }
 
-        postOrder(orderObj);
+        postTicketOrder(orderObj);
         location.href = 'http://localhost:7000/user-ticket.html';
     });
 
@@ -38,9 +38,9 @@ function getSessionStorage() {
     return sessionStorage.getItem('event-id');
  }
 
- async function postSelectedTicket() {
+ async function getSelectedEvent() {
     const sessionEventID = await getSessionStorage();
-    const url = 'http://localhost:7000/api/index/order';
+    const url = 'http://localhost:7000/api';
     
     let event = {
         eventID: sessionEventID
@@ -55,7 +55,7 @@ function getSessionStorage() {
             }
         });
         let data = await response.json();
-        showOrder(data);
+        showEvent(data);
 
     } catch(error) {
         console.log('Error: ', error);
@@ -66,8 +66,8 @@ function setSessionTicketNumber(ticketNumber) {
     sessionStorage.setItem('ticketnumber', ticketNumber);
 }
 
-async function postOrder(orderObj) {
-    const url = 'http://localhost:7000/api/index/addorder';
+async function postTicketOrder(orderObj) {
+    const url = 'http://localhost:7000/api/ticket';
     
     let body = {
         order: orderObj

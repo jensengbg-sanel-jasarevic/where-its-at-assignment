@@ -1,14 +1,17 @@
 const { getEvents, showEvent, addOrder, getTicketFromOrders } = require('../models/database-functions');
 const { generateTicketNumber } = require('../models/generate-ticket-number');
 const { Router } = require('express');
+
 const router = new Router();
 
-router.get('/getallevents', async (req, res) => {
+// GET - Retrieve all events
+router.get('/', async (req, res) => {
     const events = await getEvents();
     res.send(JSON.stringify(events));
 });
 
-router.post('/order', async (req, res) => {
+// POST - Retrieve selected event
+router.post('/', async (req, res) => {
     const body = req.body;
 
     let ticket = await showEvent(body);
@@ -25,14 +28,16 @@ router.post('/order', async (req, res) => {
     res.send(JSON.stringify(resObj));
 });
 
-router.post('/addorder', async (req, res) => {
+// POST - Add ticket order
+router.post('/ticket', async (req, res) => {
     const body = req.body;
     const ticketNumber = generateTicketNumber();
     const addTicketOrder = await addOrder(body.order, ticketNumber);
     res.send(JSON.stringify(addTicketOrder));
 });
 
-router.get('/getorderticket/:id', async (req, res) => {
+// GET - Retrieve selected ticket order
+router.get('/ticket/:id', async (req, res) => {
     const ticketNumber = req.params.id;    
 
     let getOrderTicket = await getTicketFromOrders(ticketNumber);
