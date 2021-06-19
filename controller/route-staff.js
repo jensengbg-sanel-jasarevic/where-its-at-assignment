@@ -1,5 +1,5 @@
-const { findUsername, findTicketOrder, assignVerified } = require('../models/database-functions');
-const { matchPassword } = require('../models/hash-password');
+const { findUsername, findTicketOrder, assignVerified } = require('../model/database-functions');
+const { matchPassword } = require('../model/hash-password');
 const { Router } = require("express");
 const jwt = require('jsonwebtoken');
 

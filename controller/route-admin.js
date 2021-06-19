@@ -1,5 +1,5 @@
-const { getEvents, addEvent, findUsername } = require('../models/database-functions');
-const { matchPassword } = require('../models/hash-password');
+const { getEvents, addEvent, findUsername } = require('../model/database-functions');
+const { matchPassword } = require('../model/hash-password');
 const { Router } = require("express");
 const jwt = require('jsonwebtoken');
 

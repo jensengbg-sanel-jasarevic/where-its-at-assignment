@@ -1,5 +1,5 @@
-const { getEvents, findEvent, addTicketOrder, findTicketOrder } = require('../models/database-functions');
-const { generateTicketNumber } = require('../models/generate-ticket-number');
+const { getEvents, findEvent, addTicketOrder, findTicketOrder } = require('../model/database-functions');
+const { generateTicketNumber } = require('../model/generate-ticket-number');
 const { Router } = require('express');
 
 const router = new Router();
