@@ -1,5 +1,8 @@
-    const verifyButton = document.getElementById('verify-submit')
-    signedIn();
+const urlLocal = 'http://localhost:7000';
+const urlCloud = 'https://where-its-at.herokuapp.com'    
+    
+const verifyButton = document.getElementById('verify-submit')
+signedIn();
 
     verifyButton.addEventListener('click', async () => {
         const inputTicketNumber = document.getElementById('verify-ticketnumber').value
@@ -8,7 +11,7 @@
             ticketNumber: inputTicketNumber
         };
     
-        const response = await fetch('http://localhost:7000/api/staff/verifyticket', { 
+        const response = await fetch(urlCloud + '/api/staff/verifyticket', { 
             method: 'POST',
             body: JSON.stringify(ticketObj),
             headers: { 'Content-Type': 'application/json' }}
@@ -32,9 +35,8 @@
 
     async function signedIn() {
         const token = getSessionToken();
-        const url = 'http://localhost:7000/api/staff/login';
     
-        const response = await fetch(url, { 
+        const response = await fetch(urlCloud + '/api/staff/login', { 
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -43,6 +45,6 @@
         const data = await response.json();
     
         if (!data.loginSuccess) {
-            location.href = 'http://localhost:7000/login-staff.html'
+            location.href = urlCloud + '/login-staff.html'
         } 
     };

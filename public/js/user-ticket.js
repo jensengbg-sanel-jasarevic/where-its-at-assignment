@@ -1,3 +1,6 @@
+const urlLocal = 'http://localhost:7000';
+const urlCloud = 'https://where-its-at.herokuapp.com'
+
 const sessionTicketNumber = sessionStorage.getItem('ticketnumber');
 getTicket()
 
@@ -22,8 +25,7 @@ getTicket()
 }
 
  async function getTicket() {
-    const url = `http://localhost:7000/api/ticket/${sessionTicketNumber}`;
-    const response = await fetch(url, {method: 'GET'});
+    const response = await fetch(urlCloud + `/api/ticket/${sessionTicketNumber}`, {method: 'GET'});
     const data = await response.json();
     showTicket(data);
 }
