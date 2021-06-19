@@ -1,20 +1,32 @@
-const staffSubmitLogin = document.querySelector('#staff-submit');
-const staffUserInput = document.querySelector('#staff-username');
-const staffPassInput = document.querySelector('#staff-password');
+const submitLoginBtn = document.querySelector('#staff-submit');
+const staffUsernameInput = document.querySelector('#staff-username');
+const staffPasswordInput = document.querySelector('#staff-password');
 
-async function saveToken(token) {
-    //return new Promise((resolve, reject) => {
-        sessionStorage.setItem('auth', token);
-        //resolve('Done');
-    //})
+submitLoginBtn.addEventListener('click', async () => {
+    const user = staffUsernameInput.value;
+    const pass = staffPasswordInput.value;
+
+    let login = await signIn(user, pass);
+    
+    if (login.success && login.role === 'staff') {
+        setSessionToken(login.token);
+        signedIn();
+    } else {
+        alert('Incorrect username or password')
+    }
+});
+
+async function setSessionToken(token) {
+    sessionStorage.setItem('auth', token);
 }
 
-async function getToken() {
-    return await sessionStorage.getItem('auth');
+ function getSessionToken() {
+    return sessionStorage.getItem('auth');
 }
 
-async function login(username, password) {
-    const url = 'http://localhost:7000/api/staff/loginstaff';
+async function signIn(username, password) {
+    const url = 'http://localhost:7000/api/staff';
+    
     const obj = {
         username: username,
         password: password
@@ -23,15 +35,16 @@ async function login(username, password) {
     const response = await fetch(url, { 
         method: 'POST', 
         body: JSON.stringify(obj), 
-        headers: { 'Content-Type': 'application/json' } });
+        headers: { 'Content-Type': 'application/json' } 
+    });
     const data = await response.json();
     return await data;
 }
 
-async function isLoggedIn() {
-    const token = await getToken();
+async function signedIn() {
+    const token = await getSessionToken();
 
-    const url = 'http://localhost:7000/api/staff/staffisloggedin';
+    const url = 'http://localhost:7000/api/staff/login';
 
     const response = await fetch(url, { 
         method: 'GET',
@@ -40,22 +53,8 @@ async function isLoggedIn() {
         } 
     });
     const data = await response.json();
-    console.log('isLoggedin data: ',data)
-    if (data.isLoggedIn) {
+    
+    if (data.loginSuccess) {
         location.href = 'http://localhost:7000/staff-verify.html';
     } 
 }
-
-staffSubmitLogin.addEventListener('click', async () => {
-    const user = staffUserInput.value;
-    const pass = staffPassInput.value;
-
-    let loggedIn = await login(user, pass);
-    console.log(loggedIn)
-    if (loggedIn.success && loggedIn.role === 'staff') {
-        saveToken(loggedIn.token);
-        isLoggedIn();
-    } else {
-        alert('Incorrect username or password')
-         }
-});

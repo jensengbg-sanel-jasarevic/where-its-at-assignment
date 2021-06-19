@@ -571,7 +571,7 @@ li {
     margin-top: 5%;
 }
 
-.admin-getevent {
+.events-list-admin {
     background: #231F30;
     display: flex;
     padding: 1rem;
@@ -650,7 +650,7 @@ li {
                          "tickets price" 
 }
 
-.admin-add-button {
+#add-event-btn {
     padding: 0.7rem;
     cursor: pointer;
     font-family: Fira Sans;

@@ -1,10 +1,5 @@
-const port = process.env.PORT || 5000
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 const eventsRouter = require('./routes/route-events');
 const staffRouter = require('./routes/route-staff');
@@ -12,35 +7,22 @@ const adminRouter = require('./routes/route-admin');
 
 const app = express();
 
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(cors());
- 
-/*
-async function hashPassword(passwordToHash) {
-    return await bcrypt.hash(passwordToHash, saltRounds);
-}
-async function matchPassword(userPassword, hash) {
-    const match = await bcrypt.compare(userPassword, hash);
-    return match;
-}
+// Method inbuilt in express to recognize the incoming Request Object as a JSON Object. Required when sending data.
+app.use(express.json()); 
 
-async function getPass() {
-const myPlaintextPassword = 'staff123';
-console.log(myPlaintextPassword);
-const hash = await hashPassword(myPlaintextPassword);
-console.log('Hash: ', hash);
-const match = await matchPassword(myPlaintextPassword, hash);
-console.log('Password match: ', match);
-}
-getPass()
-*/
+// URL encoding converts characters into a format that can be transmitted over the Internet. 
+// URL encoding is a mechanism for translating unprintable or special characters to a universally accepted format by web servers and browsers.
+app.use(express.urlencoded({ extended: true })); 
+app.use(cors());
+
+// Serve static files (HTML files, CSS files, JavaScript files, images etc)
+app.use(express.static('public'));
 
 // Endpoints
 app.use('/api/admin', adminRouter);
 app.use('/api/staff', staffRouter);
 app.use('/api/index', eventsRouter);
 
-app.listen(port, () => {
-    console.log('Server is running');
+app.listen(7000, () => {
+    console.log('Server running');
 })

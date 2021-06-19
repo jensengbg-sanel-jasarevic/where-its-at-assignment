@@ -1,9 +1,7 @@
-const ticketNumber = sessionStorage.getItem('ticketnumber');
-
-getOrderTicket()
+const sessionTicketNumber = sessionStorage.getItem('ticketnumber');
+getTicket()
 
  async function showTicket (data) {
-   
     let ticketEventName = document.querySelector('.ticket-eventname');
     ticketEventName.innerHTML = data.ticket.namn;
     
@@ -23,10 +21,9 @@ getOrderTicket()
     ticketNumberID.innerHTML = 'Biljettnummer: ' + data.ticket.biljettnummer;
 }
 
- async function getOrderTicket() {
-    const url = `http://localhost:7000/api/index//getorderticket/${ticketNumber}`;
+ async function getTicket() {
+    const url = `http://localhost:7000/api/index//getorderticket/${sessionTicketNumber}`;
     const response = await fetch(url, {method: 'GET'});
     const data = await response.json();
- 
     showTicket(data);
 }

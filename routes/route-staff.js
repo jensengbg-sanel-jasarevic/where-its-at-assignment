@@ -1,24 +1,20 @@
-const jwt = require('jsonwebtoken');
-
-const { Router } = require("express");
-const router = new Router();
-
 const { getUsername, getTicketFromOrders, assignVerified } = require('../models/database-functions');
 const { matchPassword } = require('../models/hash-password');
+const { Router } = require("express");
+const jwt = require('jsonwebtoken');
 
-router.post('/loginstaff', async (req, res) => {
+const router = new Router();
+
+// POST - Login authentication
+router.post('/', async (req, res) => {
     const body = req.body;
-    console.log ('Staff body: ', body);
 
     let resObj = {
         success: false
     }
 
-    const user = await getUsername(body);
-    console.log('Role: ', user.role);
-    
+    const user = await getUsername(body);    
     const isAMatch = await matchPassword(body.password, user.password);
-    console.log('isAMatch: ', isAMatch);
     
     if (user && isAMatch) {
         const token = jwt.sign({ id: user.username }, 'a2b1c1', {
@@ -28,30 +24,29 @@ router.post('/loginstaff', async (req, res) => {
         resObj.token = token;
         resObj.role = user.role;
     }
-    
     res.send(JSON.stringify(resObj));
 });
 
-router.get('/staffisloggedin', async (req, res) => {
+// GET - Check authorization
+router.get('/login', async (req, res) => {
     const token = req.header('Authorization').replace('Bearer ', '');
     
     let resObj = {
-        isLoggedIn: false
+        loginSuccess: false
     }
 
     if (token !== 'null') {
         const user = jwt.verify(token, 'a2b1c1');
-        console.log('Loggedin user jwt verify', user);
 
         if (user) {
-            resObj.isLoggedIn = true;
+            resObj.loginSuccess = true;
             resObj.user = user;
         }
     }
-
     res.send(JSON.stringify(resObj));
 });
 
+// POST - Check if ticket exist & if has been verified
 router.post('/verifyticket', async (req, res) => {
     let body = req.body;
 
@@ -61,16 +56,15 @@ router.post('/verifyticket', async (req, res) => {
         message: 'Non existing ticket number'
     };
 
-    const ticket = await getTicketFromOrders(body.ticketIDNumber);
-    console.log('Ticket: ', ticket);
+    const ticket = await getTicketFromOrders(body.ticketNumber);
 
      if (ticket && ticket.verified !== true) {
-        assignVerified(body.ticketIDNumber);
-  
+        assignVerified(body.ticketNumber);
+
             resObj.success = true;
             resObj.ticket = true;
             resObj.verified = true;
-            resObj.message = 'Ticket has been verified'
+            resObj.message = 'Ticket verified'
 
       } else if (ticket && ticket.verified == true) {
             resObj.success = false,

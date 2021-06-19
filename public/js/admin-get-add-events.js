@@ -1,16 +1,36 @@
-const adminAddButton = document.querySelector('#admin-add-submit');
-let adminGetEvents = document.querySelector('.admin-getevent');
+let addEventBtn = document.querySelector('#add-event-btn');
+let eventList = document.querySelector('.events-list-admin');
+signedIn();
 
-function getToken() {
+addEventBtn.addEventListener('click', () => {
+    const formName = document.querySelector('#admin-add-name');
+    const formWhere = document.querySelector('#admin-add-where');
+    const formDate = document.querySelector('#admin-add-date');
+    const formFrom = document.querySelector('#admin-add-from');
+    const formTo = document.querySelector('#admin-add-to');
+    const formTickets = document.querySelector('#admin-add-tickets');
+    const formPrice = document.querySelector('#admin-add-price');
+    
+        let formObj = {
+            nameFormInput: formName.value,
+            whereFormInput: formWhere.value,
+            dateFormInput: formDate.value,
+            fromFormInput: formFrom.value,
+            toFormInput: formTo.value,
+            ticketsFormInput: parseInt (formTickets.value),
+            priceFormInput: parseInt (formPrice.value)
+        }
+        addEvent(formObj);
+        getEvents();
+    });
+
+function getSessionToken() {
     return sessionStorage.getItem('auth');
 } 
 
-isLoggedIn();
-
-async function isLoggedIn() {
-    const token = getToken();
-
-    const url = 'http://localhost:7000/api/admin/adminisloggedin';
+async function signedIn() {
+    const token = getSessionToken();
+    const url = 'http://localhost:7000/api/admin/login';
 
     const response = await fetch(url, { 
         method: 'GET',
@@ -19,67 +39,66 @@ async function isLoggedIn() {
         } 
     });
     const data = await response.json();
-    console.log('isLoggedin data: ',data)
 
-    if (data.isLoggedIn) {
+    if (data.loginSuccess) {
         getEvents();
-    } else if (!data.isLoggedIn) {
+    } else if (!data.loginSuccess) {
         location.href = 'http://localhost:7000/login-admin.html'
     } 
 };
 
 async function getEvents() {
-    const url = 'http://localhost:7000/api/admin/getevents';
+    const url = 'http://localhost:7000/api/admin/events';
     const response = await fetch(url, {method: 'GET'});
     const data = await response.json();
     showEvents(data);
 };
 
 async function showEvents(events) {
-    let adminName = document.createElement('ul');
-    adminName.classList.add('admin-name');
-    adminName.innerHTML += 'NAMN';
+    let nameElement = document.createElement('ul');
+    nameElement.classList.add('admin-name');
+    nameElement.innerHTML = 'NAMN';
    
-    let adminWhere = document.createElement('ul');
-    adminWhere.classList.add('admin-where');
-    adminWhere.innerHTML += 'VAR';
+    let whereElement = document.createElement('ul');
+    whereElement.classList.add('admin-where');
+    whereElement.innerHTML = 'VAR';
 
-    let adminQuantity = document.createElement('ul');
-    adminQuantity.classList.add('admin-quantity');
-    adminQuantity.innerHTML += 'ANTAL PLATSER';
+    let capacityElement = document.createElement('ul');
+    capacityElement.classList.add('admin-quantity');
+    capacityElement.innerHTML = 'ANTAL PLATSER';
 
-    let adminSoldTickets = document.createElement('ul');
-    adminSoldTickets.classList.add('admin-soldtickets');
-    adminSoldTickets.innerHTML += 'SÅLDA BILJETTER';
+    let soldTicketsElement = document.createElement('ul');
+    soldTicketsElement.classList.add('admin-soldtickets');
+    soldTicketsElement.innerHTML = 'SÅLDA BILJETTER';
 
-    for(event of events) {    
-        let adminEventName = document.createElement('li');
-        adminEventName.classList.add('admin-eventname');
-        adminEventName.innerHTML += event.namn;
+    for(eventData of events) {   
+        let eventName = document.createElement('li');
+        eventName.classList.add('admin-eventname');
+        eventName.innerHTML = eventData.namn;
 
-        let adminPlace = document.createElement('li');
-        adminPlace.classList.add('admin-place');
-        adminPlace.innerHTML += event.var;
+        let eventPlace = document.createElement('li');
+        eventPlace.classList.add('admin-place');
+        eventPlace.innerHTML = eventData.var;
 
-        let adminQuantityNumber = document.createElement('li');
-        adminQuantityNumber.classList.add('admin-quantitynumber');
-        adminQuantityNumber.innerHTML += event.platser;
+        let eventCapacity = document.createElement('li');
+        eventCapacity.classList.add('admin-quantitynumber');
+        eventCapacity.innerHTML = eventData.platser;
 
-        let adminTicketsSold = document.createElement('li');
-        adminTicketsSold.classList.add('admin-ticketssold');
-        adminTicketsSold.innerHTML += event.biljetter;
+        let eventSoldTickets = document.createElement('li');
+        eventSoldTickets.classList.add('admin-ticketssold');
+        eventSoldTickets.innerHTML = eventData.biljetter;
 
-         adminName.append(adminEventName);
-         adminWhere.append(adminPlace);
-         adminQuantity.append(adminQuantityNumber);
-         adminSoldTickets.append(adminTicketsSold);
-         adminGetEvents.append(adminName, adminWhere, adminQuantity, adminSoldTickets);
+        nameElement.append(eventName);
+        whereElement.append(eventPlace);
+        capacityElement.append(eventCapacity);
+        soldTicketsElement.append(eventSoldTickets);
+        eventList.append(nameElement, whereElement, capacityElement, soldTicketsElement);
     }
 };
 
 async function addEvent(event) {
     try {
-        const url = 'http://localhost:7000/api/admin/addevents';
+        const url = 'http://localhost:7000/api/admin/events';
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(event),
@@ -87,38 +106,10 @@ async function addEvent(event) {
                 'Content-Type': 'application/json'
             }
         });
-
         const data = response.json();
-        return await data;
-
+        
+    return await data;
     } catch(error) {
-        console.log('Error', error);
+        console.log('Error: ', error);
     }
 };
-
-async function clearShowEvents() {
-    adminGetEvents.innerHTML = '';
-}
-
-adminAddButton.addEventListener('click', () => {
-const formName = document.querySelector('#admin-add-name');
-const formWhere = document.querySelector('#admin-add-where');
-const formDate = document.querySelector('#admin-add-date');
-const formFrom = document.querySelector('#admin-add-from');
-const formTo = document.querySelector('#admin-add-to');
-const formTickets = document.querySelector('#admin-add-tickets');
-const formPrice = document.querySelector('#admin-add-price');
-
-    let formObj = {
-        nameFormInput: formName.value,
-        whereFormInput: formWhere.value,
-        dateFormInput: formDate.value,
-        fromFormInput: formFrom.value,
-        toFormInput: formTo.value,
-        ticketsFormInput: parseInt (formTickets.value),
-        priceFormInput: parseInt (formPrice.value)
-    }
-    clearShowEvents();
-    addEvent(formObj);
-    getEvents();
-});

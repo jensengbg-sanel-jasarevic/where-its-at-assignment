@@ -10,3 +10,15 @@ module.exports = {
         return match;
     }
 }
+
+/*
+getPass()
+async function getPass() {
+const myPlaintextPassword = 'staff123';
+console.log(myPlaintextPassword);
+const hash = await hashPassword(myPlaintextPassword);
+console.log('Hash: ', hash);
+const match = await matchPassword(myPlaintextPassword, hash);
+console.log('Password match: ', match);
+}
+*/

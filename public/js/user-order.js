@@ -1,98 +1,91 @@
+const submitOrderButton = document.querySelector('#order-submit');
+postSelectedTicket();
+
 function showOrder(order) {
-    let orderTicket = document.querySelector('.order-ticket');
-    let displayOrder = document.createElement('div');
-    displayOrder.classList.add('myTicket');
+    submitOrderButton.addEventListener('click', () => {
 
-    displayOrder.innerHTML +=
-        '<h1 class="order-eventname">' + order.name + '</h1>' + 
-        '<p class="order-date">' + order.date + ' kl ' + order.from + '-' + order.to + '<p>' +  
-        '<p class="order-place">' + '@ ' + order.where + '<p>' + 
-        '<p class="order-price">' + order.price + ' sek<p>';
-    orderTicket.append(displayOrder);
-
-    submitOrder(order);
-}
-
-function getSessionID() {
-    return sessionStorage.getItem('event-id');
- }
-
- async function getOrder() {
-    const ticketID = await getSessionID();
-    const url = 'http://localhost:7000/api/index/order';
-    
-    let obj = {
-        eventID: ticketID
-    }
-    
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(obj),
-            headers : {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const data = await response.json();
-        console.log('Data: ', data)
-        showOrder(data);
-
-    } catch(error) {
-        console.log('Error', error);
-    }
-}
-
-function sessionStoreTicketNumber(ticketNumber) {
-    sessionStorage.setItem('ticketnumber', ticketNumber);
-}
-
-async function addOrder(myOrder) {
-    const url = 'http://localhost:7000/api/index/addorder';
-    
-    let body = {
-        order: myOrder
-    }
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const data = await response.json();
-        sessionStoreTicketNumber(data.biljettnummer);
-
-    } catch(error) {
-        console.log('Error', error);
-    }
-}
-
-function submitOrder(order) {
-    const addOrderButton = document.querySelector('#order-submit');
-    let myOrder = order;
-    
-    addOrderButton.addEventListener('click', () => {
-        
         let orderObj = {
-            id: myOrder.id,
-            namn: myOrder.name,
-            var: myOrder.where,
-            datum: myOrder.date,
-            from: myOrder.from,
-            till: myOrder.to,
+            id: order.id,
+            namn: order.name,
+            var: order.where,
+            datum: order.date,
+            from: order.from,
+            till: order.to,
             platser: 0,
             biljetter: 0,
             pris: 0,
             verified: false
         }
 
-        addOrder(orderObj);
+        postOrder(orderObj);
         location.href = 'http://localhost:7000/user-ticket.html';
     });
+
+    let orderSectionTag = document.querySelector('.order-ticket');
+    let orderDivTag = document.createElement('div');
+    orderDivTag.classList.add('myTicket');
+
+    orderDivTag.innerHTML =
+        '<h1 class="order-eventname">' + order.name + '</h1>' + 
+        '<p class="order-date">' + order.date + ' kl ' + order.from + '-' + order.to + '<p>' +  
+        '<p class="order-place">' + '@ ' + order.where + '<p>' + 
+        '<p class="order-price">' + order.price + ' sek<p>';
+
+    orderSectionTag.append(orderDivTag);
 }
 
-getOrder();
+function getSessionStorage() {
+    return sessionStorage.getItem('event-id');
+ }
+
+ async function postSelectedTicket() {
+    const sessionEventID = await getSessionStorage();
+    const url = 'http://localhost:7000/api/index/order';
+    
+    let event = {
+        eventID: sessionEventID
+    }
+    
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(event),
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        });
+        let data = await response.json();
+        showOrder(data);
+
+    } catch(error) {
+        console.log('Error: ', error);
+    }
+}
+
+function setSessionTicketNumber(ticketNumber) {
+    sessionStorage.setItem('ticketnumber', ticketNumber);
+}
+
+async function postOrder(orderObj) {
+    const url = 'http://localhost:7000/api/index/addorder';
+    
+    let body = {
+        order: orderObj
+    }
+
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        let data = await response.json();
+        
+        setSessionTicketNumber(data.biljettnummer);
+
+    } catch(error) {
+        console.log('Error: ', error);
+    }
+}
