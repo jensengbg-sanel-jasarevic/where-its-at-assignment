@@ -1,3 +1,6 @@
+#### URL
+https://where-its-at.herokuapp.com
+
 # Inlämningsuppgift Where it's @
 
 ## Vad
@@ -35,9 +38,7 @@ staff123<br>
 admin-user<br>
 admin123<br>
 
+Cloud platform deploy: Heroku<br>
 **Namngivining av projekt:** where-its-at-förnamn-efternamn<br>
 
 **Inlämning senast:** 5/6 23:59
-<br>
-Cloud platform deploy:<br>
-https://where-its-at.herokuapp.com
