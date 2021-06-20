@@ -38,7 +38,8 @@ staff123<br>
 admin-user<br>
 admin123<br>
 
-Cloud platform deploy: Heroku<br>
+Cloud platform deploy: Heroku
+
 **Namngivining av projekt:** where-its-at-förnamn-efternamn<br>
 
 **Inlämning senast:** 5/6 23:59
