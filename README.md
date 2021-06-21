@@ -1,7 +1,7 @@
 #### URL
 https://where-its-at.herokuapp.com
 
-# Inlämningsuppgift Where it's @
+# Inlämningsuppgift: Where it's @
 
 ## Vad
 
@@ -15,19 +15,19 @@ ett biljettnummer. En person som arbetar som personal kan logga in och verifiera
 ## Hur
 
 **För att få Godkänt ska du:**
-* Utvecklad enligt skiss
-* Det går att lägga en beställning på en biljett och fått biljettnummer
-* Det går att verifiera biljetten
-* Det ska inte gå att verifiera biljetten mer än **en** gång
-* Det går att lägga till ett nytt event
+* Utvecklad enligt skiss.
+* Det går att lägga en beställning på en biljett och fått biljettnummer.
+* Det går att verifiera biljetten.
+* Det ska inte gå att verifiera biljetten mer än **en** gång.
+* Det går att lägga till ett nytt event.
 * För att kunna skapa ett event eller verifiera en biljett krävs en staff-eller admin-roll.
-* Använder JWT tokens
-* Avänder hashade lösenord med bcrypt
+* Använder JWT tokens.
+* Avänder hashade lösenord med bcrypt.
 
 **För att Väl Godkänt ska du:**
-* Allt i godkänt
+* Allt i godkänt.
 * Din Node.js kod är strukturerad enligt MVC-pattern (Model-View-Controller).
-* Det går att se antal biljetter kvar och när det är slutsålt går det inte att lägga en beställning
+* Det går att se antal biljetter kvar och när det är slutsålt går det inte att lägga en beställning.
 
 Inlämning sker via Github och Learnpoint. Ladda upp ditt projekt på Github. Gå sedan in på Learnpoint och under innehåll finns det en inlämningsuppgift där du ska posta din länk till ditt repo.
 

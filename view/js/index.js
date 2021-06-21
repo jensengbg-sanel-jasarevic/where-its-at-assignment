@@ -1,9 +1,11 @@
-const localURL = 'http://localhost:7000';
-const cloudURL = 'https://where-its-at.herokuapp.com'
+// Local API server URL: http://localhost:7000
+// Cloud API server URL: https://where-its-at.herokuapp.com
+
+const API_URL = 'https://where-its-at.herokuapp.com'
 
 const eventsListSectionTag = document.querySelector('.events-list');
 
-fetch(cloudURL + '/api', { method: 'GET' })
+fetch(API_URL + '/api', { method: 'GET' })
   .then(response => response.json())
   .then(data => showEvents(data));
 
@@ -47,7 +49,7 @@ function selectedEvent() {
       events[i].addEventListener('click',  () => {
           let eventID = events[i].id;
           sessionStorage.setItem('event-id', eventID);
-          location.href = cloudURL + '/selected-event.html';
+          location.href = API_URL + '/selected-event.html';
       });
     }
 }

@@ -1,5 +1,7 @@
-const localURL = 'http://localhost:7000';
-const cloudURL = 'https://where-its-at.herokuapp.com'
+// Local API server URL: http://localhost:7000
+// Cloud API server URL: https://where-its-at.herokuapp.com
+
+const API_URL = 'https://where-its-at.herokuapp.com'
 
 const sessionTicketNumber = sessionStorage.getItem('ticketnumber');
 getTicket()
@@ -25,7 +27,7 @@ getTicket()
 }
 
  async function getTicket() {
-    const response = await fetch(cloudURL + `/api/ticket/${sessionTicketNumber}`, {method: 'GET'});
+    const response = await fetch(API_URL + `/api/ticket/${sessionTicketNumber}`, {method: 'GET'});
     const data = await response.json();
     showTicket(data);
 }

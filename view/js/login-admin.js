@@ -1,5 +1,7 @@
-const localURL = 'http://localhost:7000';
-const cloudURL = 'https://where-its-at.herokuapp.com'
+// Local API server URL: http://localhost:7000
+// Cloud API server URL: https://where-its-at.herokuapp.com
+
+const API_URL = 'https://where-its-at.herokuapp.com'
 
 const submitLoginBtn = document.querySelector('#admin-submit');
 const adminUsernameInput = document.querySelector('#admin-username');
@@ -33,7 +35,7 @@ async function signIn(username, password) {
         password: password
     }
 
-    const response = await fetch(cloudURL + '/api/admin', { 
+    const response = await fetch(API_URL + '/api/admin', { 
         method: 'POST', 
         body: JSON.stringify(obj), 
         headers: { 'Content-Type': 'application/json' } 
@@ -45,7 +47,7 @@ async function signIn(username, password) {
 async function signedIn() {
     const token = await getSessionToken();
 
-    const response = await fetch(cloudURL + '/api/admin/login', { 
+    const response = await fetch(API_URL + '/api/admin/login', { 
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token
@@ -54,6 +56,6 @@ async function signedIn() {
     const data = await response.json();
     
     if (data.loginSuccess) {
-        location.href = cloudURL + '/loggedin-admin.html';
+        location.href = API_URL + '/loggedin-admin.html';
     } 
 }

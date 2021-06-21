@@ -1,5 +1,7 @@
-const localURL = 'http://localhost:7000';
-const cloudURL = 'https://where-its-at.herokuapp.com'
+// Local API server URL: http://localhost:7000
+// Cloud API server URL: https://where-its-at.herokuapp.com
+
+const API_URL = 'https://where-its-at.herokuapp.com'
     
 const verifyButton = document.getElementById('verify-submit')
 signedIn();
@@ -11,7 +13,7 @@ signedIn();
             ticketNumber: inputTicketNumber
         };
     
-        const response = await fetch(cloudURL + '/api/staff/verifyticket', { 
+        const response = await fetch(API_URL + '/api/staff/verifyticket', { 
             method: 'POST',
             body: JSON.stringify(ticketObj),
             headers: { 'Content-Type': 'application/json' }}
@@ -36,7 +38,7 @@ signedIn();
     async function signedIn() {
         const token = getSessionToken();
     
-        const response = await fetch(cloudURL + '/api/staff/login', { 
+        const response = await fetch(API_URL + '/api/staff/login', { 
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -45,6 +47,6 @@ signedIn();
         const data = await response.json();
     
         if (!data.loginSuccess) {
-            location.href = cloudURL + '/login-staff.html'
+            location.href = API_URL + '/login-staff.html'
         } 
     };

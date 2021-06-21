@@ -1,5 +1,7 @@
-const localURL = 'http://localhost:7000';
-const cloudURL = 'https://where-its-at.herokuapp.com' 
+// Local API server URL: http://localhost:7000
+// Cloud API server URL: https://where-its-at.herokuapp.com
+
+const API_URL = 'https://where-its-at.herokuapp.com'
 
 let eventList = document.querySelector('.events-list-admin');
 let addEventBtn = document.querySelector('#add-event-btn');
@@ -35,7 +37,7 @@ function getSessionToken() {
 async function signedIn() {
     const token = getSessionToken();
 
-    const response = await fetch(cloudURL + '/api/admin/login', { 
+    const response = await fetch(API_URL + '/api/admin/login', { 
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token
@@ -46,12 +48,12 @@ async function signedIn() {
     if (data.loginSuccess) {
         getEvents();
     } else if (!data.loginSuccess) {
-        location.href = cloudURL + '/login-admin.html'
+        location.href = API_URL + '/login-admin.html'
     } 
 };
 
 async function getEvents() {
-    const response = await fetch(cloudURL + '/api/admin/events', { method: 'GET' } );
+    const response = await fetch(API_URL + '/api/admin/events', { method: 'GET' } );
     const data = await response.json();
     showEvents(data);
 };
@@ -100,7 +102,7 @@ async function showEvents(events) {
 
 async function addEvent(event) {
     try {
-        const response = await fetch(cloudURL + '/api/admin/events', {
+        const response = await fetch(API_URL + '/api/admin/events', {
             method: 'POST',
             body: JSON.stringify(event),
             headers: {
