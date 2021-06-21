@@ -43,7 +43,7 @@ router.get('/ticket/:id', async (req, res) => {
     let getOrderTicket = await findTicketOrder(ticketNumber);
 
     let resObj = {
-        ticket: getOrderTicket
+        ticketOrder: getOrderTicket
     }
     res.send(JSON.stringify(resObj));
 });
