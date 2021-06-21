@@ -8,19 +8,19 @@ getTicket()
 
  async function showTicket (data) {
     let ticketEventName = document.querySelector('.ticket-eventname');
-    ticketEventName.innerHTML = data.ticket.namn;
+    ticketEventName.innerHTML = data.ticket.name;
     
     let ticketWhere = document.querySelector('.ticket-where');
-    ticketWhere.innerHTML = data.ticket.var;
+    ticketWhere.innerHTML = data.ticket.where;
     
     let ticketDate = document.querySelector('.ticket-date');
-    ticketDate.innerHTML = data.ticket.datum;
+    ticketDate.innerHTML = data.ticket.date;
     
     let ticketFromTime = document.querySelector('.ticket-fromtime');
     ticketFromTime.innerHTML = data.ticket.from;
     
     let ticketToTime = document.querySelector('.ticket-totime');
-    ticketToTime.innerHTML = data.ticket.till;
+    ticketToTime.innerHTML = data.ticket.until;
     
     let ticketNumberID = document.querySelector('.ticket-numberID');
     ticketNumberID.innerHTML = 'Biljettnummer: ' + data.ticket.biljettnummer;

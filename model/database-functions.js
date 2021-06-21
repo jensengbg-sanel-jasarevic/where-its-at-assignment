@@ -11,7 +11,7 @@ async getEvents() {
 },
 
 async addEvent(adminFormInput) {
-    return await db.get('events').push({id: uuid, namn: adminFormInput.nameFormInput, var: adminFormInput.whereFormInput, datum: adminFormInput.dateFormInput, from: adminFormInput.fromFormInput, till: adminFormInput.toFormInput, platser: 0, biljetter: adminFormInput.ticketsFormInput, pris: adminFormInput.priceFormInput}).write();
+    return await db.get('events').push({id: uuid, name: adminFormInput.nameFormInput, where: adminFormInput.whereFormInput, date: adminFormInput.dateFormInput, from: adminFormInput.fromFormInput, until: adminFormInput.toFormInput, seats: 0, tickets: adminFormInput.ticketsFormInput, price: adminFormInput.priceFormInput}).write();
 },
 
 async findUsername(user) {
@@ -24,17 +24,17 @@ async findEvent(event) {
 
 async addTicketOrder(order, ticketNumber) {
     let userOrder = order; 
-    userOrder.biljettnummer = ticketNumber;
+    userOrder.ticket = ticketNumber;
     await db.get('orders').push(userOrder).write();
     return userOrder;
 },
 
 async findTicketOrder(ticketNumber) {
-    return await db.get('orders').find({ biljettnummer: ticketNumber }).value();
+    return await db.get('orders').find({ ticket: ticketNumber }).value();
 },
 
 async assignVerified(ticketNumber) {
-    return await db.get('orders').find({ biljettnummer: ticketNumber }).assign({verified: true}).write();
+    return await db.get('orders').find({ ticket: ticketNumber }).assign({verified: true}).write();
 },
 
 };

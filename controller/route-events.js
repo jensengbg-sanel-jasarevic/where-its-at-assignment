@@ -18,12 +18,12 @@ router.post('/', async (req, res) => {
 
     let resObj = {
         id: ticket.id,
-        name: ticket.namn,
-        where: ticket.var,
-        date: ticket.datum,
+        name: ticket.name,
+        where: ticket.where,
+        date: ticket.date,
         from: ticket.from,
-        to: ticket.till,
-        price: ticket.pris
+        until: ticket.until,
+        price: ticket.price
     }    
     res.send(JSON.stringify(resObj));
 });

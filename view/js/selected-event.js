@@ -11,14 +11,14 @@ function showEvent(order) {
 
         let orderObj = {
             id: order.id,
-            namn: order.name,
-            var: order.where,
-            datum: order.date,
+            name: order.name,
+            where: order.where,
+            date: order.date,
             from: order.from,
-            till: order.to,
-            platser: 0,
-            biljetter: 0,
-            pris: 0,
+            until: order.until,
+            seats: 0,
+            tickets: 0,
+            price: 0,
             verified: false
         }
 
@@ -32,7 +32,7 @@ function showEvent(order) {
 
     orderDivTag.innerHTML =
         '<h1 class="order-eventname">' + order.name + '</h1>' + 
-        '<p class="order-date">' + order.date + ' kl ' + order.from + '-' + order.to + '<p>' +  
+        '<p class="order-date">' + order.date + ' kl ' + order.from + '-' + order.until + '<p>' +  
         '<p class="order-place">' + '@ ' + order.where + '<p>' + 
         '<p class="order-price">' + order.price + ' sek<p>';
 
@@ -85,7 +85,7 @@ async function postTicketOrder(orderObj) {
         });
         let data = await response.json();
         
-        setSessionTicketNumber(data.biljettnummer);
+        setSessionTicketNumber(data.ticket);
 
     } catch(error) {
         console.log('Error: ', error);

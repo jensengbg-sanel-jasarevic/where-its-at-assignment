@@ -67,9 +67,9 @@ async function showEvents(events) {
     whereElement.classList.add('admin-where');
     whereElement.innerHTML = 'VAR';
 
-    let capacityElement = document.createElement('ul');
-    capacityElement.classList.add('admin-quantity');
-    capacityElement.innerHTML = 'ANTAL PLATSER';
+    let seatsElement = document.createElement('ul');
+    seatsElement.classList.add('admin-quantity');
+    seatsElement.innerHTML = 'ANTAL PLATSER';
 
     let soldTicketsElement = document.createElement('ul');
     soldTicketsElement.classList.add('admin-soldtickets');
@@ -78,25 +78,25 @@ async function showEvents(events) {
     for(eventData of events) {   
         let eventName = document.createElement('li');
         eventName.classList.add('admin-eventname');
-        eventName.innerHTML = eventData.namn;
+        eventName.innerHTML = eventData.name;
 
         let eventPlace = document.createElement('li');
         eventPlace.classList.add('admin-place');
-        eventPlace.innerHTML = eventData.var;
+        eventPlace.innerHTML = eventData.where;
 
-        let eventCapacity = document.createElement('li');
-        eventCapacity.classList.add('admin-quantitynumber');
-        eventCapacity.innerHTML = eventData.platser;
+        let eventSeats = document.createElement('li');
+        eventSeats.classList.add('admin-quantitynumber');
+        eventSeats.innerHTML = eventData.seats;
 
         let eventSoldTickets = document.createElement('li');
         eventSoldTickets.classList.add('admin-ticketssold');
-        eventSoldTickets.innerHTML = eventData.biljetter;
+        eventSoldTickets.innerHTML = eventData.tickets;
 
         nameElement.append(eventName);
         whereElement.append(eventPlace);
-        capacityElement.append(eventCapacity);
+        seatsElement.append(eventSeats);
         soldTicketsElement.append(eventSoldTickets);
-        eventList.append(nameElement, whereElement, capacityElement, soldTicketsElement);
+        eventList.append(nameElement, whereElement, seatsElement, soldTicketsElement);
     }
 };
 

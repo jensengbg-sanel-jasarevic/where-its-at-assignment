@@ -24,10 +24,10 @@ const showEvents = data => {
     eventPlace.setAttribute('class', 'event-place');
     eventTimePrice.setAttribute('class', 'event-time-price');
 
-    eventDate.innerHTML = data[i].datum;
-    eventHeader.innerHTML = data[i].namn;
-    eventPlace.innerHTML = data[i].var;
-    eventTimePrice.innerHTML = data[i].from + ' - ' + data[i].till + '<span class="event-price">' + data[i].pris + ' sek</span>';
+    eventDate.innerHTML = data[i].date;
+    eventHeader.innerHTML = data[i].name;
+    eventPlace.innerHTML = data[i].where;
+    eventTimePrice.innerHTML = data[i].from + ' - ' + data[i].until + '<span class="event-price">' + data[i].price + ' sek</span>';
     
     eventsListSectionTag.append(eventDate);
     eventsListSectionTag.append(eventInfo);

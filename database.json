@@ -2,47 +2,47 @@
   "events": [
     {
       "id": "9bb08e42-ac61-49a9-995f-d00593d9e3e9",
-      "namn": "Elias Kody",
-      "var": "Oslo",
-      "datum": "21 Mar",
+      "name": "Elias Kody",
+      "where": "Oslo",
+      "date": "21 Mar",
       "from": "19.00",
-      "till": "21.00",
-      "platser": 300,
-      "biljetter": 125,
-      "pris": 350
+      "until": "21.00",
+      "seats": 300,
+      "tickets": 125,
+      "price": 350
     },
     {
       "id": "0870985f-d8ec-4a47-a082-3087276a7364",
-      "namn": "Victor Collective",
-      "var": "Göteborg",
-      "datum": "29 Mar",
+      "name": "Victor Collective",
+      "where": "Göteborg",
+      "date": "29 Mar",
       "from": "22.00",
-      "till": "00.00",
-      "platser": 100,
-      "biljetter": 19,
-      "pris": 110
+      "until": "00.00",
+      "seats": 100,
+      "tickets": 77,
+      "price": 120
     },
     {
       "id": "092fcf7f-f988-4e20-a98b-bd91402ae0f1",
-      "namn": "John Brown",
-      "var": "Berlin",
-      "datum": "10 Apr",
+      "name": "John Brown",
+      "where": "Berlin",
+      "date": "10 Apr",
       "from": "15.00",
-      "till": "16.00",
-      "platser": 1000,
-      "biljetter": 454,
-      "pris": 99
+      "until": "16.00",
+      "seats": 1000,
+      "tickets": 454,
+      "price": 99
     },
     {
       "id": "456b6fbd-1e56-4959-a928-1be5adcf87e9",
-      "namn": "Express",
-      "var": "Copenhagen",
-      "datum": "17 Apr",
+      "name": "Express",
+      "where": "Copenhagen",
+      "date": "17 Apr",
       "from": "22.00",
-      "till": "02.00",
-      "platser": 120,
-      "biljetter": 77,
-      "pris": 150
+      "until": "02.00",
+      "seats": 120,
+      "tickets": 77,
+      "price": 150
     }
   ],
   "orders": [
